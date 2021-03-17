@@ -1,0 +1,86 @@
+const roles = ['user','block_manager','admin'];
+
+const roleRights = new Map();
+roleRights.set(roles[0], [
+  'getUsers',
+  'manageUsers',
+  'getDepartment',
+  'getDivision',
+  'getDesignation',
+  'getPanchayat',
+  'createTask',
+  'getProject',
+  'getTask',
+  'getExpense',
+  'manageExpense',
+  'getDocument',
+  'getDocuments',
+  'createDocument',
+  'getDashBoardData'
+]);
+roleRights.set(roles[1], [
+  'getUsers',
+  'manageUsers',
+  'getDepartment',
+  'manageDepartment',
+  'manageDivision',
+  'getDivision',
+  'getDesignation',
+  'manageDesignation',
+  'getBlock',
+  'manageBlock',
+  'managePanchayat',
+  'getPanchayat',
+  'createProject',
+  'getProject',
+  'manageProject',
+  'createTask',
+  'getTask',
+  'getTasks',
+  'manageTask',
+  'deleteTask',
+  'createDocument',
+  'getDocument',
+  'getDocuments',
+  'manageDocument',
+  'getExpense',
+  'manageExpense',
+  'getLogs',
+  'getDashBoardData'
+]);
+
+roleRights.set(roles[2], [
+  'getUsers',
+  'manageUsers',
+  'getDepartment',
+  'manageDepartment',
+  'manageDivision',
+  'getDivision',
+  'getDesignation',
+  'manageDesignation',
+  'getBlock',
+  'manageBlock',
+  'managePanchayat',
+  'getPanchayat',
+  'createProject',
+  'getProject',
+  'createTask',
+  'manageProject',
+  'getTask',
+  'getTasks',
+  'manageTask',
+  'deleteTask',
+  'createDocument',
+  'getDocument',
+  'getDocuments',
+  'manageDocument',
+  'getExpense',
+  'manageExpense',
+  'getLogs',
+  'getDashBoardData'
+]);
+
+module.exports = {
+  roles,
+  roleRights,
+};
