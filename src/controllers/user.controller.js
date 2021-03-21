@@ -31,7 +31,19 @@ const updateUser = catchAsync(async (req, res) => {
 
 const deleteUser = catchAsync(async (req, res) => {
   await userService.deleteUserById(req.params.userId);
-  res.status(httpStatus.NO_CONTENT).send();
+  res.send({ status : true });
+});
+
+const changePassword = catchAsync(async (req, res) => {
+  console.log(req.user, "sdvdfvdfjnkjn")
+  const user = await userService.changePassword(req.user.id, req.body.password , req.body.new_password);
+  res.send(user);
+
+});
+
+const changeEmail = catchAsync(async (req, res) => {
+  const user = await userService.changeEmail(req.user.id, req.body.password , req.body.email);
+  res.send(user);
 });
 
 module.exports = {
@@ -40,4 +52,6 @@ module.exports = {
   getUser,
   updateUser,
   deleteUser,
+  changeEmail,
+  changePassword
 };

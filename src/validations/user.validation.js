@@ -8,7 +8,7 @@ const createUser = {
     first_name: Joi.string().required(),
     last_name: Joi.string().required(),
     role: Joi.string(),
-    contact: Joi.string().required()
+    contact: Joi.string()
   }),
 };
 
@@ -43,10 +43,8 @@ const updateUser = {
       last_name: Joi.string(),
       role: Joi.string(),
       contact: Joi.string(),
-      designation_id: Joi.string().custom(objectId),
-      block_id: Joi.string().custom(objectId),
-      panchayat_id: Joi.string().custom(objectId),
       status: Joi.boolean(),
+      dob: Joi.string()
     })
     .min(1),
 };
@@ -57,10 +55,26 @@ const deleteUser = {
   }),
 };
 
+const changeEmail = {
+  body: Joi.object().keys({
+    email: Joi.string().required().email(),
+    password: Joi.string().required().custom(password),
+  }),
+};
+
+const changePassword = {
+  body: Joi.object().keys({
+    new_password:  Joi.string().required().custom(password),
+    password: Joi.string().required().custom(password),
+  }),
+};
+
 module.exports = {
   createUser,
   getUsers,
   getUser,
   updateUser,
   deleteUser,
+  changeEmail,
+  changePassword
 };

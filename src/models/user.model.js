@@ -3,7 +3,15 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const { toJSON, paginate } = require('./plugins');
 const { roles } = require('../config/roles');
+const { notificationTypes } = require("../config/constants")
 
+const bindNotofications = () => {
+  let obj = {};
+  notificationTypes.forEach(element => {
+    obj[element] = false;
+  })
+  return obj;
+}
 const userSchema = mongoose.Schema(
   {
     first_name: {
@@ -49,9 +57,18 @@ const userSchema = mongoose.Schema(
       enum: roles,
       default: 'user',
     },
+    notification:{
+      type: Object,
+      enum: notificationTypes,
+      default: bindNotofications()
+    },
     avatar: {
       type: String,
       default: '',
+    },
+    dob: {
+      type : Date,
+      default: null
     },
     status: {
       type: Boolean,

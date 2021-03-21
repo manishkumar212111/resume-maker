@@ -17,4 +17,12 @@ router
   .patch(auth('manageUsers'), validate(userValidation.updateUser), userController.updateUser)
   .delete(auth('manageUsers'), validate(userValidation.deleteUser), userController.deleteUser);
 
+router
+.route('/password')
+.post(auth('changePasssword'), validate(userValidation.changePassword), userController.changePassword)
+
+router
+.route('/email')
+.post(auth('changeEmail'), validate(userValidation.changeEmail), userController.changeEmail)
+
 module.exports = router;

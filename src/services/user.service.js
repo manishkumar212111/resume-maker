@@ -27,9 +27,6 @@ const createUser = async (userBody) => {
 const queryUsers = async (filter, options) => {
   console.log(filter);
   const users = await User.find(filter)
-                          .populate('block_id', { block_name: 1 })
-                          .populate('designation_id', { designation_name: 1 })
-                          .populate('panchayat_id',{panchayat_name: 1})
                           .exec();
   return users;
 };
@@ -40,11 +37,7 @@ const queryUsers = async (filter, options) => {
  * @returns {Promise<User>}
  */
 const getUserById = async (id) => {
-  return User.findById(id)
-  .populate('block_id', { block_name: 1 })
-  .populate('designation_id', { designation_name: 1 })
-  .populate('panchayat_id',{panchayat_name: 1})
-  .exec();;
+  return User.findById(id).exec();
 };
 
 /**
@@ -53,7 +46,7 @@ const getUserById = async (id) => {
  * @returns {Promise<User>}
  */
 const getUserByEmail = async (email) => {
-  return User.findOne({ email });
+  return User.findOne({ email } , {'email' : 1, 'password' : 1 , 'status': 1 , 'first_name' : 1 , 'last_name' : 1 , 'role' : 1});
 };
 
 const checkLogin = async (email) => {
@@ -93,6 +86,41 @@ const deleteUserById = async (userId) => {
   return user;
 };
 
+/**
+ * Change user password
+ * @param {ObjectId} password
+ * @returns {Promise<User>}
+ */
+ const changePassword = async (userId , password , new_password) => {
+  const user = await getUserById(userId);
+  console.log(userId)
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+  if (!(await user.isPasswordMatch(password))) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect current password');
+  }
+  await updateUserById(user.id, { password: new_password });
+  return user;
+};
+
+/**
+ * Change user password
+ * @param {ObjectId} password
+ * @returns {Promise<User>}
+ */
+ const changeEmail = async (userId , password , email) => {
+  const user = await getUserById(userId);
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+  if (!(await user.isPasswordMatch(password))) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect current password');
+  }
+  await updateUserById(user.id, { email: email });
+  return user;
+};
+
 module.exports = {
   createUser,
   queryUsers,
@@ -101,4 +129,6 @@ module.exports = {
   updateUserById,
   deleteUserById,
   checkLogin,
+  changePassword,
+  changeEmail,
 };
