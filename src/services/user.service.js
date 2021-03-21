@@ -118,6 +118,7 @@ const deleteUserById = async (userId) => {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect current password');
   }
   await updateUserById(user.id, { email: email });
+  user.email = email;
   return user;
 };
 
