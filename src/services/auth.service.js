@@ -20,6 +20,7 @@ const loginUserWithEmailAndPassword = async (email, password) => {
     if (!user || !(await user.isPasswordMatch(password))) {
       throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password');
     }
+    await userService.updateUserById(user.id , { last_action : new Date().toISOString()});
     return user;
   }
 };

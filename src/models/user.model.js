@@ -66,6 +66,10 @@ const userSchema = mongoose.Schema(
       type: String,
       default: '',
     },
+    last_action : {
+      type : Date,
+      default: new Date()
+    },
     dob: {
       type : Date,
       default: null

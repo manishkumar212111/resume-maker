@@ -42,6 +42,7 @@ const updateUser = {
       first_name: Joi.string(),
       last_name: Joi.string(),
       role: Joi.string(),
+      notification: Joi.object(),
       contact: Joi.string(),
       status: Joi.boolean(),
       dob: Joi.string()
