@@ -4,7 +4,7 @@ const userService = require('./user.service');
 const Token = require('../models/token.model');
 const ApiError = require('../utils/ApiError');
 const { tokenTypes } = require('../config/tokens');
-
+const config = require("../config/config");
 /**
  * Login with username and password
  * @param {string} email
@@ -77,9 +77,49 @@ const resetPassword = async (resetPasswordToken, newPassword) => {
   }
 };
 
+/**
+ * Google login
+ * @param {string} token
+ */
+ const googleLogin = async ( token ) => {
+  try {
+
+    const { OAuth2Client } = require('google-auth-library')
+    const client = new OAuth2Client(config.GOOGLE_LOGIN_CLIENT_ID)
+
+    const ticket = await client.verifyIdToken({
+        idToken: token,
+        audience: config.GOOGLE_LOGIN_CLIENT_ID
+    });
+    console.log(ticket.getPayload());
+    const { name, email, picture , given_name , family_name , } = ticket.getPayload();
+    if(email){
+        let newUser = await userService.getUserByEmail(email);
+        if(!newUser){
+          let userBody = {
+            first_name : given_name,
+            last_name : family_name,
+            email : email
+          }
+          let user = await userService.createUser(userBody);
+          const tokens = await tokenService.generateAuthTokens(user);
+          return { user, tokens };
+        } else {
+          const tokens = await tokenService.generateAuthTokens(newUser);
+          await userService.updateUserById(newUser.id , { last_action : new Date().toISOString()});
+          return { user : newUser , tokens : tokens };         
+        }
+    }
+} catch (error) {
+    console.log(error)
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Something went wrong');
+  }
+};
+
 module.exports = {
   loginUserWithEmailAndPassword,
   logout,
   refreshAuth,
   resetPassword,
+  googleLogin
 };
