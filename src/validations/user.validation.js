@@ -17,8 +17,6 @@ const getUsers = {
     name: Joi.string(),
     role: Joi.string(),
     status: Joi.boolean(),
-    block_id: Joi.string().custom(objectId),
-    panchayat_id: Joi.string().custom(objectId),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),

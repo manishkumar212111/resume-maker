@@ -25,9 +25,8 @@ const createUser = async (userBody) => {
  * @returns {Promise<QueryResult>}
  */
 const queryUsers = async (filter, options) => {
-  console.log(filter);
-  const users = await User.find(filter)
-                          .exec();
+  
+  const users = await User.paginate(filter, options);
   return users;
 };
 
@@ -49,8 +48,8 @@ const getUserByEmail = async (email) => {
   return User.findOne({ email } , {'email' : 1, 'password' : 1 , 'status': 1 , 'first_name' : 1 , 'last_name' : 1 , 'role' : 1});
 };
 
-const checkLogin = async (email) => {
-  return User.findOne({ email, status: true });
+const checkLogin = async (email, role="user") => {
+  return User.findOne({ email, status: true, role:role });
 };
 
 /**

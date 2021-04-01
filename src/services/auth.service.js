@@ -11,8 +11,8 @@ const config = require("../config/config");
  * @param {string} password
  * @returns {Promise<User>}
  */
-const loginUserWithEmailAndPassword = async (email, password) => {
-  const user = await userService.checkLogin(email);
+const loginUserWithEmailAndPassword = async (email, password, role="user") => {
+  const user = await userService.checkLogin(email, role);
   if (!user) {
     throw new ApiError(httpStatus.UNAUTHORIZED, "User doesn't exist.");
   } else {

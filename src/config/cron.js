@@ -9,7 +9,7 @@ const removeInActiveUser = () => {
     //   });
 
     // cron.schedule('* * * * * * *', async () => {
-    //     console.log('It will run cron every minute');
+    //     console.log('It will run cron every seconds');
     //     // perform user action
     //     // console.log(moment().subtract(36, 'months').toISOString())
     //     let dayThreeYearsBack = moment().subtract(36, 'months').toISOString();
