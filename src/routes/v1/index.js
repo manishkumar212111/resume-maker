@@ -5,6 +5,8 @@ const planRoute = require('./plan.route');
 const transactionRoute = require('./transaction.route');
 const enquiryRoute = require('./enquiry.route');
 const commonRoute = require('./common.route');
+const blogRoute = require('./blog.route');
+
 
 
 
@@ -17,6 +19,7 @@ router.use(['/common'], commonRoute);
 router.use(['/transaction'], transactionRoute);
 
 router.use(['/enquiry'], enquiryRoute);
+router.use(['/blog'], blogRoute);
 
 
 
