@@ -6,7 +6,9 @@ roleRights.set(roles[0], [
   'manageUsers',
   'getPlans',
   'changePasssword',
-  'changeEmail'
+  'changeEmail',
+  'managePayment',
+  'manageEnquirys'
   ]);
 
 roleRights.set(roles[1], [
@@ -15,7 +17,11 @@ roleRights.set(roles[1], [
   'getPlans',
   'managePlans',
   'changePasssword',
-  'changeEmail'
+  'changeEmail',
+  'manageTransactions',
+  'getTransactions',
+  'manageEnquirys',
+  'getEnquirys'
 ]);
 
 

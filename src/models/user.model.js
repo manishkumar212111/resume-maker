@@ -60,6 +60,10 @@ const userSchema = mongoose.Schema(
       enum: notificationTypes,
       default: bindNotofications()
     },
+    subscription:{
+      type: Object,
+      default: { type : 'free'}
+    },
     avatar: {
       type: String,
       default: '',
