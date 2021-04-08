@@ -6,6 +6,8 @@ module.exports.planService = require('./plan.service');
 module.exports.transactionService = require('./transaction.service');
 module.exports.enquiryService = require('./enquiry.service');
 module.exports.blogService = require('./blog.service');
+module.exports.dashBoardService = require('./dashboard.service');
+
 
 
 
