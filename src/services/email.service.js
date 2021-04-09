@@ -1,7 +1,8 @@
 const nodemailer = require('nodemailer');
 const config = require('../config/config');
 const logger = require('../config/logger');
-
+const { e_templateService, blogService } = require("../services");
+const { getEmailTemplateByType } = require('./e_template.service');
 const transport = nodemailer.createTransport(config.email.smtp);
 /* istanbul ignore next */
 if (config.env !== 'test') {
@@ -10,6 +11,39 @@ if (config.env !== 'test') {
     .then(() => logger.info('Connected to email server'))
     .catch(() => logger.warn('Unable to connect to email server. Make sure you have configured the SMTP options in .env'));
 }
+
+// {
+//   type : "",
+//   data : {},
+//   email : ""
+// }
+/**
+ * Send an email
+ * @param {string} to
+ * @param {string} subject
+ * @param {string} text
+ * @returns {Promise}
+ */
+const sendSmailUsingTemplate = async (data) => {
+  try{
+    console.log(e_templateService , blogService , getEmailTemplateByType);
+    let emTemplate = await getEmailTemplateByType(data.type);
+    
+    emTemplate = emTemplate[0];
+    const subject = emTemplate.subject;
+    emTemplate.dynamic_var.forEach(elem => {
+      emTemplate.content = emTemplate.content.split("{{"+elem+"}}").join(data.data[elem]);
+    })
+    
+    emTemplate.content = emTemplate.content.split("&lt;").join("<")
+    
+    const msg = { from: config.email.from, to : data.email, subject : emTemplate.subject, html : emTemplate.content };
+    await transport.sendMail(msg);
+  } catch (err){
+    console.log(err);
+  }
+  
+};
 
 /**
  * Send an email
@@ -52,4 +86,5 @@ module.exports = {
   sendEmail,
   sendResetPasswordEmail,
   sendOTP,
+  sendSmailUsingTemplate,
 };

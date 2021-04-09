@@ -25,7 +25,9 @@ roleRights.set(roles[1], [
   'manageEnquirys',
   'getEnquirys',
   'manageBlogs',
-  'getBlogs'
+  'getBlogs',
+  'manageE_templates',
+  'getE_templates'
 ]);
 
 

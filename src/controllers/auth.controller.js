@@ -28,7 +28,19 @@ const refreshTokens = catchAsync(async (req, res) => {
 
 const forgotPassword = catchAsync(async (req, res) => {
   const resetPasswordToken = await tokenService.generateResetPasswordToken(req.body.email);
-  await emailService.sendResetPasswordEmail(req.body.email, resetPasswordToken);
+  const resetPasswordUrl = `http://localhost:3000/reset-password?token=${resetPasswordToken}`;
+
+  await emailService.sendSmailUsingTemplate({
+    type: "reset_password",
+    data: {
+      first_name : "User",
+      email:req.body.email,
+      link : resetPasswordUrl
+    },
+    email : req.body.email
+  })
+
+  // await emailService.sendResetPasswordEmail(req.body.email, resetPasswordToken);
   res.status(httpStatus.NO_CONTENT).send();
 });
 
