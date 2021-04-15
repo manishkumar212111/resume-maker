@@ -25,4 +25,8 @@ router
 .route('/email')
 .post(auth('changeEmail'), validate(userValidation.changeEmail), userController.changeEmail)
 
+router
+.route('/auth')
+.post(auth('getUsers'), validate(userValidation.empty), userController.getUserDetails)
+
 module.exports = router;

@@ -67,7 +67,9 @@ const changePassword = {
     password: Joi.string().required().custom(password),
   }),
 };
-
+const empty = {
+  
+}
 module.exports = {
   createUser,
   getUsers,
@@ -75,5 +77,6 @@ module.exports = {
   updateUser,
   deleteUser,
   changeEmail,
-  changePassword
+  changePassword,
+  empty
 };

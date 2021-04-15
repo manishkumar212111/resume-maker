@@ -46,6 +46,10 @@ const changeEmail = catchAsync(async (req, res) => {
   res.send(user);
 });
 
+const getUserDetails = catchAsync(async (req , res) => {
+  const user = await userService.getUserDetails(req.user.id);
+  res.send(user);
+})
 module.exports = {
   createUser,
   getUsers,
@@ -53,5 +57,6 @@ module.exports = {
   updateUser,
   deleteUser,
   changeEmail,
-  changePassword
+  changePassword,
+  getUserDetails
 };

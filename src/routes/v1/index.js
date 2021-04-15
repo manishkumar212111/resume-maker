@@ -7,6 +7,7 @@ const enquiryRoute = require('./enquiry.route');
 const commonRoute = require('./common.route');
 const blogRoute = require('./blog.route');
 const E_template = require("./e.template.route")
+const Product = require("./product.route")
 
 
 
@@ -21,6 +22,8 @@ router.use(['/transaction'], transactionRoute);
 router.use(['/enquiry'], enquiryRoute);
 router.use(['/blog'], blogRoute);
 router.use('/email-template', E_template);
+router.use('/product', Product);
+
 
 
 

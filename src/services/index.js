@@ -8,8 +8,8 @@ module.exports.enquiryService = require('./enquiry.service');
 module.exports.blogService = require('./blog.service');
 module.exports.dashBoardService = require('./dashboard.service');
 module.exports.e_templateService = require('./e_template.service');
+module.exports.productService = require('./product.service');
 
-console.log(module.exports.e_templateService)
 
 
 

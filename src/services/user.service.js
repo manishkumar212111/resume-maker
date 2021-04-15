@@ -122,6 +122,26 @@ const deleteUserById = async (userId) => {
   return user;
 };
 
+const getUserDetails = async (userId) => {
+  let user = await getUserById(userId);
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+  let expires = true;
+  if(user.subscription){
+    if(user.subscription.type !== 'free'){
+      if(new Date().toISOString() > user.subscription.expires){
+        expires = true;
+      } else {
+        expires = false;
+      }
+    }
+  }
+  return {
+    user : user,
+    expires : expires
+  };
+}
 module.exports = {
   createUser,
   queryUsers,
@@ -132,4 +152,5 @@ module.exports = {
   checkLogin,
   changePassword,
   changeEmail,
+  getUserDetails
 };

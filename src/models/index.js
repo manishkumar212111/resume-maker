@@ -5,6 +5,7 @@ module.exports.Transaction = require('./transaction.model');
 module.exports.Enquiry = require('./enquiry.model');
 module.exports.Blog = require('./blog.model');
 module.exports.E_template = require('./e_template.model');
+module.exports.Product = require('./product.model');
 
 
 
