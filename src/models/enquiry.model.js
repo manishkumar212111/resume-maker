@@ -13,6 +13,10 @@ const enquirySchema = mongoose.Schema(
         required: true,
         index: true,
     },
+    subject: {
+      type: String,
+      default : "",
+    },
     name: {
         type: String,
         required: true,

@@ -10,7 +10,7 @@ const DashboardController = require('../../controllers/dashboard.controller');
 
 const router = express.Router();
 
-router.get('/plans', validate(PlanValidation.getPlans), PlanController.getPlans);
+router.get('/plans', validate(PlanValidation.getPlans), PlanController.getPlansByPrice);
 router.get('/plans/:planId', validate(PlanValidation.getPlans), PlanController.getPlan);
 router.post('/enquiry', validate(EnquiryValidation.createEnquiry), EnquiryController.createEnquiry);
 router.get('/dashboard', DashboardController.getData);

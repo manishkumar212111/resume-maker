@@ -6,6 +6,7 @@ const createEnquiry = {
     name: Joi.string(),
     message: Joi.string().required(),
     email: Joi.string().required(),
+    subject : Joi.string(),
     status: Joi.string(),     
   }),
 };
@@ -37,6 +38,7 @@ const updateEnquiry = {
     .keys({
         name: Joi.string(),
         message: Joi.string(),
+      subject : Joi.string(),
         email: Joi.string(),
         status: Joi.string(),
     })

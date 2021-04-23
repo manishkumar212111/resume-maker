@@ -99,6 +99,49 @@ const getPlan = catchAsync(async (req, res) => {
 
   // res.send(plan);
 });
+const getPlansByPrice = catchAsync(async (req, res) => {
+  let plan = await planService.getPlansByPrice();
+
+
+  if(req.query.currencyType){
+    if(req.query.currencyType == 'INR' || req.query.currencyType == 'USD'){
+
+        let h = []
+        plan.forEach(async element => {
+          console.log(element._doc)
+          h.push(
+            {...element._doc ,
+             ...{ currencyType : req.query.currencyType , id : element.id,
+                 calculated_price :  req.query.currencyType == 'USD' ? element._doc.priceInDollar : element._doc.price  } })
+        });
+        plan = h;
+        return res.send(plan);
+      
+
+    } else {
+
+      await convertPriceToLocale(req.query.currencyType , (exchange_rate) => {
+        let h = []
+        plan.forEach(async element => {
+          console.log(element._doc)
+          
+          h.push(
+            {...element._doc ,
+             ...{currencyType : exchange_rate ? req.query.currencyType : 'USD' ,id : element.id,
+                 calculated_price : Math.round((exchange_rate || 1) * element._doc.priceInDollar * 100) / 100 } })
+        });
+        plan = h;
+        return res.send(plan);
+      
+      })
+    
+    }
+    
+  } else {
+    return res.send(plan);
+  }
+  res.send(plan);
+});
 
 const updatePlan = catchAsync(async (req, res) => {
   const plan = await planService.updatePlanById(req.params.planId, req.body);
@@ -193,7 +236,8 @@ module.exports = {
   getPlan,
   updatePlan,
   deletePlan,
-  handlePayment
+  handlePayment,
+  getPlansByPrice
 };
 
 // const payment = await stripe.paymentIntents.create({

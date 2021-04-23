@@ -40,6 +40,10 @@ const queryPlans = async (filter, options) => {
   return plans;
 };
 
+const getPlansByPrice = async () => {
+  const plans = await Plan.find({}).sort('price')
+  return plans;
+}
 /**
  * Get plan by id
  * @param {ObjectId} id
@@ -103,7 +107,7 @@ const subscribeUserToPlan = async ( userId , planId) => {
 
   // create Subscription to user
   let subscriptionObj = userDetail.subscription ? userDetail.subscription : {};
-  subscriptionObj['type'] = 'pro';
+  subscriptionObj['type'] = planDetail.name;
   subscriptionObj['start'] = subscriptionObj['start'] ? subscriptionObj['start'] : new Date().toISOString()  
   subscriptionObj['expires'] = subscriptionObj['expires'] ? Moment(subscriptionObj['expires']).add(planDetail.validity , 'month').format() : Moment().add(planDetail.validity , 'month').toISOString();
   
@@ -137,5 +141,6 @@ module.exports = {
   updatePlanById,
   deletePlanById,
   validatePrice,
-  addSubscriptionToUser
+  addSubscriptionToUser,
+  getPlansByPrice
 };
