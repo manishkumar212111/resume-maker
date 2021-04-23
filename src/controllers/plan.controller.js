@@ -108,7 +108,6 @@ const getPlansByPrice = catchAsync(async (req, res) => {
 
         let h = []
         plan.forEach(async element => {
-          console.log(element._doc)
           h.push(
             {...element._doc ,
              ...{ currencyType : req.query.currencyType , id : element.id,
@@ -123,7 +122,6 @@ const getPlansByPrice = catchAsync(async (req, res) => {
       await convertPriceToLocale(req.query.currencyType , (exchange_rate) => {
         let h = []
         plan.forEach(async element => {
-          console.log(element._doc)
           
           h.push(
             {...element._doc ,
@@ -140,7 +138,7 @@ const getPlansByPrice = catchAsync(async (req, res) => {
   } else {
     return res.send(plan);
   }
-  res.send(plan);
+  // res.send(plan);
 });
 
 const updatePlan = catchAsync(async (req, res) => {
