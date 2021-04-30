@@ -13,6 +13,10 @@ const blogSchema = mongoose.Schema(
         required: true,
         index: true,
     },
+    shortDescription : {
+      type: String,
+      default : ''
+    },
     metaDescription: {
         type: String,
         required: true,
@@ -21,6 +25,10 @@ const blogSchema = mongoose.Schema(
     status: {
       type: Boolean,
       default : true
+    },
+    thumbnail_url: {
+      type: String,
+      default : ''
     }
   },
   {

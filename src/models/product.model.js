@@ -9,8 +9,17 @@ const productSchema = mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
       trim: true,
+      default : ""
+    },
+    default: {
+        type: Boolean,
+        default: false
+    },
+    template_id: {
+        type: String,
+        trim: true,
+        default: 1  
     },
     user: {
         type: mongoose.SchemaTypes.ObjectId,
@@ -20,10 +29,6 @@ const productSchema = mongoose.Schema(
     status : {
         type : Number,
         default : 1
-    },
-    sample_id: {
-        type : String,
-        required : true
     },
     contact_information : {
         type : Object,
@@ -229,6 +234,8 @@ const productSchema = mongoose.Schema(
             fontType : "",
             fontStyle : "",
             background : "",
+            text_color: "",
+            theme : ""
         }
     }
   },

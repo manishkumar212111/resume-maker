@@ -6,7 +6,9 @@ const createBlog = {
     title: Joi.string().required(),
     content: Joi.string().required(),
     metaDescription: Joi.string().required(),
-    status: Joi.boolean(),     
+    status: Joi.boolean(),  
+    thumbnail_url: Joi.string(),
+    shortDescription: Joi.string()   
   }),
 };
 
@@ -38,7 +40,9 @@ const updateBlog = {
         title: Joi.string(),
         content: Joi.string(),
         metaDescription: Joi.string(),
-        status: Joi.boolean(),         
+        status: Joi.boolean(),  
+        thumbnail_url: Joi.string(),
+        shortDescription: Joi.string()   
     })
     .min(1),
 };

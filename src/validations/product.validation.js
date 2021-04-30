@@ -19,9 +19,9 @@ const createProduct = {
     references : Joi.array(),
     hobbies : Joi.array(),
     custom_field: Joi.object(),
-    name: Joi.string().required(),
-    smaple_id : Joi.string().required(),
-    user:Joi.required().custom(objectId),
+    name: Joi.string(),
+    template_id : Joi.string().required(),
+    user:Joi.custom(objectId),
     status : Joi.number(),
     sample_map : Joi.object(),
     style : Joi.object() 
@@ -70,7 +70,7 @@ const updateProduct = {
         hobbies : Joi.array(),
         custom_field: Joi.object(),
         name: Joi.string(),
-        smaple_id : Joi.string(),
+        template_id : Joi.string(),
         status : Joi.number(),
         sample_map : Joi.object(),
         style : Joi.object()        
@@ -86,7 +86,7 @@ const deleteProduct = {
 
 const getProductUser = {
     params: Joi.object().keys({
-        userId: Joi.string().custom(objectId),
+        // userId: Joi.string().custom(objectId),
     }),
 }
 

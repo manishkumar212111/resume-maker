@@ -12,15 +12,16 @@ router
   .post(auth('manageProducts'), validate(ProductValidation.createProduct), ProductController.createProduct)
   .get(auth('getProducts'), validate(ProductValidation.getProducts), ProductController.getProducts);
 
+
+router
+.route('/user')
+.get(auth('getProducts'), validate(ProductValidation.getProductUser), ProductController.getProductsByUser)
+
 router
   .route('/:productId')
   .get(auth('getProducts'), validate(ProductValidation.getProduct), ProductController.getProduct)
   .patch(auth('manageProducts'), validate(ProductValidation.updateProduct), ProductController.updateProduct)
   .delete(auth('manageProducts'), validate(ProductValidation.deleteProduct), ProductController.deleteProduct);
 
-
-router
-.route('user/:userId')
-.get(auth('getProducts'), validate(ProductValidation.getProductUser), ProductController.getProductsByUser)
 
 module.exports = router;

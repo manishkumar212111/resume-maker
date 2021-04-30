@@ -7,7 +7,7 @@ require("dotenv").config();
 const stripe = require("stripe")(process.env.STRIP_SECRTE_KEY);
 
 const createProduct = catchAsync(async (req, res) => {
-  const product = await productService.createProduct(req.body);
+  const product = await productService.createProduct(req.body, req.user);
   res.status(httpStatus.CREATED).send(product);
 });
 
@@ -41,8 +41,8 @@ const deleteProduct = catchAsync(async (req, res) => {
 });
 
 const getProductsByUser = catchAsync(async (req, res) => {
-  await productService.getProductsByUser(req.params.userId);
-  res.send({ status : true });
+  let resumes = await productService.getProductsByUser(req.params.userId ? req.params.userId : req.user.id);
+  res.send(resumes);
 });
 
 module.exports = {

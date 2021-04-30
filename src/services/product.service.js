@@ -12,10 +12,22 @@ var mongoose = require('mongoose');
  * @param {Object} productBody
  * @returns {Promise<Product>}
  */
-const createProduct = async (productBody) => {
-  
-  const product = await Product.create({ ...productBody });
-  return product;
+const createProduct = async (productBody , user) => {
+  productBody.user = user.id;
+  const existingProducts = await Product.find({ user : user.id, default: true});
+  if(existingProducts && existingProducts.length){
+    let checkExpire = await userService.getUserDetails(user.id);
+    if(!checkExpire.expires){
+      const product = await Product.create({ ...productBody});
+      return product;
+    } else {
+      const product = await updateProductById(existingProducts[0].id, productBody);
+      return product;      
+    }
+  } else {
+    const product = await Product.create({ ...productBody, default: true });
+    return product;
+  }   
 };
 
 /**
@@ -80,8 +92,15 @@ const deleteProductById = async (productId) => {
 };
 
 const getProductsByUser = async (userId) => {
-    const product = await Product.find({user : userId });
-    return product;
+    let checkExpire = await userService.getUserDetails(userId);
+    if(checkExpire.expires){
+      const product = await Product.find({user : userId , default : true }).select('id updatedAt name template_id');
+      return product;
+    } else {
+      const product = await Product.find({user : userId }).select('id updatedAt name template_id');
+      return product;
+    }
+    
 }
 
 module.exports = {

@@ -10,7 +10,9 @@ roleRights.set(roles[0], [
   'managePayment',
   'manageEnquirys',
   'manageBlogs',
-  'getBlogs'
+  'getBlogs',
+  'manageProducts',
+  'getProducts'
   ]);
 
 roleRights.set(roles[1], [
@@ -27,7 +29,10 @@ roleRights.set(roles[1], [
   'manageBlogs',
   'getBlogs',
   'manageE_templates',
-  'getE_templates'
+  'getE_templates',
+  'manageProducts',
+  'getProducts'
+
 ]);
 
 
