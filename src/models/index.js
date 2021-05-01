@@ -6,7 +6,7 @@ module.exports.Enquiry = require('./enquiry.model');
 module.exports.Blog = require('./blog.model');
 module.exports.E_template = require('./e_template.model');
 module.exports.Product = require('./product.model');
-
+module.exports.Basic_info = require('./basic_info.model')
 
 
 

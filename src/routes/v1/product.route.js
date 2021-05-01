@@ -16,6 +16,7 @@ router
 router
 .route('/user')
 .get(auth('getProducts'), validate(ProductValidation.getProductUser), ProductController.getProductsByUser)
+.post(auth('getProducts'), validate(ProductValidation.updateUserInfo), ProductController.addUserInfo)
 
 router
   .route('/:productId')

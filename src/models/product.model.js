@@ -235,7 +235,14 @@ const productSchema = mongoose.Schema(
             fontStyle : "",
             background : "",
             text_color: "",
-            theme : ""
+            theme : "",
+            icons : [
+                { value:"summary", text: "Summary" , status : false},
+                { value:"jobTitle", text: "Job Title" , status : false},
+                { value:"industry", text: "Industry" , status : false},
+                { value:"photo", text: "Photo" , status : false},
+            
+            ]
         }
     }
   },

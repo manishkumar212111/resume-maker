@@ -85,16 +85,28 @@ const deleteProduct = {
 };
 
 const getProductUser = {
-    params: Joi.object().keys({
-        // userId: Joi.string().custom(objectId),
-    }),
+  body: Joi.object().keys({
+    first_name : Joi.string(),
+    last_name : Joi.string(),
+    email : Joi.string(),
+    address : Joi.object(),
+    dob : Joi.date(),
+    contact : Joi.string(),
+    ccode : Joi.string(),
+    willing_to_relocate : Joi.boolean(),
+    social_account : Joi.array()
+    })
 }
 
+const updateUserInfo = {
+
+}
 module.exports = {
   createProduct,
   getProducts,
   getProduct,
   updateProduct,
   deleteProduct,
-  getProductUser
+  getProductUser,
+  updateUserInfo
 };

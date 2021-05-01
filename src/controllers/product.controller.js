@@ -8,7 +8,11 @@ const stripe = require("stripe")(process.env.STRIP_SECRTE_KEY);
 
 const createProduct = catchAsync(async (req, res) => {
   const product = await productService.createProduct(req.body, req.user);
-  res.status(httpStatus.CREATED).send(product);
+  let basic_info = await productService.getuserInfo(req.user.id);
+  res.send({
+    resume_detail : product,
+    basic_info : basic_info
+  });
 });
 
 const getProducts = catchAsync(async (req, res) => {
@@ -27,7 +31,11 @@ const getProduct = catchAsync(async (req, res) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'Product not found');
   }
 
-    res.send(product);
+  let basic_info = await productService.getuserInfo(req.user.id);
+  res.send({
+    product : product,
+    basic_info : basic_info
+  });
 });
 
 const updateProduct = catchAsync(async (req, res) => {
@@ -41,8 +49,18 @@ const deleteProduct = catchAsync(async (req, res) => {
 });
 
 const getProductsByUser = catchAsync(async (req, res) => {
-  let resumes = await productService.getProductsByUser(req.params.userId ? req.params.userId : req.user.id);
+  res.send(await productService.getProductsByUser(req.params.userId ? req.params.userId : req.user.id));
+  // let basic_info = await productService.getuserInfo(req.user.id);
+  // res.send({
+  //   resume_detail : resumes,
+  //   basic_info : basic_info
+  // });
+});
+
+const addUserInfo = catchAsync(async (req, res) => {
+  let resumes = await productService.addUserInfo(req.body , req.params.userId ? req.params.userId : req.user.id);
   res.send(resumes);
+
 });
 
 module.exports = {
@@ -51,5 +69,6 @@ module.exports = {
   getProduct,
   updateProduct,
   deleteProduct,
-  getProductsByUser
+  getProductsByUser,
+  addUserInfo
 };
