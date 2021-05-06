@@ -26,7 +26,7 @@ const templateController = catchAsync(async(req, res) => {
     })
     // const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto('https://www.google.com', {
+    await page.goto('https://shrouded-crag-50550.herokuapp.com/pricing', {
       waitUntil: 'networkidle2',
     });
     let test =  await page.pdf({ path: 'hn.pdf', format: 'a4' });
