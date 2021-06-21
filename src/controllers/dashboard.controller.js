@@ -22,7 +22,11 @@ const templateController = catchAsync(async(req, res) => {
     path = path.resolve('/usr/bin/google-chrome-stable')
 
     const browser = await puppeteer.launch({
-        executablePath: path
+        executablePath: path,
+        'args' : [
+            '--no-sandbox',
+            '--disable-setuid-sandbox'
+          ]
     })
     console.log(req.query.product_id);
     // const browser = await puppeteer.launch();
