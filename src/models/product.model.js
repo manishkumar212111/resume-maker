@@ -26,34 +26,53 @@ const productSchema = mongoose.Schema(
         ref: 'User',
         required: true,  
     },
+    basic_info: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'basic_info',
+        required: true,  
+    },
+    extra: {
+        type : Object,
+        default : {}
+    },
     status : {
         type : Number,
         default : 1
     },
-    contact_information : {
+    basic_info : {
         type : Object,
         default : {
-            name : "",
-            title : "",
-            phone_number : "",
+            first_name : "",
+            last_name : "",
             email : "",
-            social_account : {
-                facebook : "",
-                insta : "",
-                linkedin: "",
-                twitter : "",
-                skype: "",
-                codebase: "",
-                website:"",
-                extra : ""
+            address : {
+                address : "",
+                status : true,
+                city : {
+                    value : "",
+                    status : true
+                },
+                state : {
+                    value : "",
+                    status : true
+                },
+                country : {
+                    value : "",
+                    status : true
+                },
             },
-            website : "",
-            address : "",
-            city : "",
-            country: "",
-            dob: "",
-            state: "",
-            willing_to_relocate: ""
+            dob : "",
+            contact : "",
+            ccode: "+91",
+            willing_to_relocate : "",
+            social_account : [
+                { type : "linkedin", status : false , url : "" },
+                { type : "github", status : false , url : "" },
+                { type : "instagram", status : false , url : "" },
+                { type : "facebook", status : false , url : "" },
+                { type : "twitter", status : false , url : "" },
+                { type : "gitlab", status : false , url : "" }
+            ]
         }
     },
     summary : {
@@ -61,39 +80,42 @@ const productSchema = mongoose.Schema(
         default : ""
     },
     employment_history: {
-        type : Object,
-        default : {
-            title : "",
-            company : "",
-            location : "",
-            durantion : {
-                from : "",
-                to: ""
-            },
-            achievements : "",
-            description: ""
-        }
+        type : Array,
+        default : [],
+        // {
+        //     title : "",
+        //     company : "",
+        //     location : "",
+        //     durantion : {
+        //         from : "",
+        //         to: ""
+        //     },
+        //     achievements : "",
+        //     description: ""
+        // }
     },
     education : {
-        type : Object,
-        default : {
-            institute_name: "",
-            degree : "",
-            degree_major: "",
-            duration : {
-                from : "",
-                to: ""
-            },
-            courses : [],
-            projects: [],
-            thesis: [],
-            awards: [],
-            location : "",
-            marks : {
-                value: "",
-                type: ""
-            }
-        }
+        type : Array,
+        default : [
+            // {
+        //     institute_name: "",
+        //     degree : "",
+        //     degree_major: "",
+        //     duration : {
+        //         from : {mm : "" , yy : ""},
+        //         to: {mm : "" , yy : ""}
+        //     },
+        //     courses : [],
+        //     projects: [],
+        //     thesis: [],
+        //     awards: [],
+        //     location : "",
+        //     marks : {
+        //         value: "",
+        //         type: ""
+        //     }
+        // }
+        ]
     },
     skills :{ 
         type : Object,
@@ -139,36 +161,38 @@ const productSchema = mongoose.Schema(
     conferences : {
         type : Object,
         default : [{
-            topic: "",
+            title: "",
             date : "",
             location : "",
             description : ""
         }]
     },
     awards : {
-        type : Object,
-        default : [{
-            title: "",
-            date : "",
-            issued_by:"",
-            location : "",
-            description : ""
-        }]
+        type : Array,
+        default : []
+        // default : [{
+        //     title: "",
+        //     date : "",
+        //     issued_by:"",
+        //     location : "",
+        //     description : ""
+        // }]
     },
     achievements : {
         type : Object,
         default : [{
             title: "",
             date : "",
+            location: "",
             associated_with:"",
             description : ""
         }]
     },
-    volunteers_works : {
+    volunteers : {
         type : Object,
         default : [{
             organization_name: "",
-            cause : "",
+            title : "",
             role:"",
             date : "",
             description: "",
@@ -197,7 +221,7 @@ const productSchema = mongoose.Schema(
         type: Object,
         default: []
     },
-    custom_field : {
+    custom_field : [{
         type : Object,
         default: {
             title : "",
@@ -205,7 +229,7 @@ const productSchema = mongoose.Schema(
             description: "",
             location : ""
         }
-    },
+    }],
     sample_map : {
         type : Object,
         default : {
@@ -220,7 +244,7 @@ const productSchema = mongoose.Schema(
             conferences : false,
             awards : false,
             achievements: false,
-            volunteers_works: false,
+            volunteers: false,
             patents : false,
             references : false,
             hobbies : false,

@@ -3,11 +3,14 @@ const validate = require('../../middlewares/validate');
 const PlanValidation = require('../../validations/plan.validation');
 const EnquiryValidation = require('../../validations/enquiry.validation');
 const BlogValidation = require('../../validations/blog.validation');
+const ProductValidation = require('../../validations/product.validation');
+
 
 const PlanController = require('../../controllers/plan.controller');
 const EnquiryController = require('../../controllers/enquiry.controller');
 const DashboardController = require('../../controllers/dashboard.controller');
 const BlogController = require('../../controllers/blog.controller');
+const ProductController = require('../../controllers/product.controller');
 
 
 const router = express.Router();
@@ -18,8 +21,8 @@ router.post('/enquiry', validate(EnquiryValidation.createEnquiry), EnquiryContro
 router.get('/dashboard', DashboardController.getData);
 router.get('/template', DashboardController.templateController);
 router.get('/blog' , validate(BlogValidation.getBlogs) , BlogController.getBlogs);
-router.get('/blog/:blogId' , validate(BlogValidation.getBlogs) , BlogController.getBlog);
+router.get('/blog/:blogId' , validate(BlogValidation.getBlog) , BlogController.getBlog);
 
-
+router.get('/downloads/api/:productId' ,validate(ProductValidation.getProduct) , ProductController.getProduct)
 
 module.exports = router;

@@ -12,8 +12,9 @@ var mongoose = require('mongoose');
  * @param {Object} productBody
  * @returns {Promise<Product>}
  */
-const createProduct = async (productBody , user) => {
+const createProduct = async (productBody , user, basic_info) => {
   productBody.user = user.id;
+  productBody.basic_info = basic_info;
   const existingProducts = await Product.find({ user : user.id, default: true});
   if(existingProducts && existingProducts.length){
     let checkExpire = await userService.getUserDetails(user.id);

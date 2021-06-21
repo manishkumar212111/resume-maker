@@ -7,10 +7,10 @@ require("dotenv").config();
 const stripe = require("stripe")(process.env.STRIP_SECRTE_KEY);
 
 const createProduct = catchAsync(async (req, res) => {
-  const product = await productService.createProduct(req.body, req.user);
   let basic_info = await productService.getuserInfo(req.user.id);
+  const product = await productService.createProduct(req.body, req.user , basic_info._id);
   res.send({
-    resume_detail : product,
+    product : product,
     basic_info : basic_info
   });
 });
@@ -31,7 +31,7 @@ const getProduct = catchAsync(async (req, res) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'Product not found');
   }
 
-  let basic_info = await productService.getuserInfo(req.user.id);
+  let basic_info = await productService.getuserInfo(req.user && req.user.id ? req.user.id : product.user);
   res.send({
     product : product,
     basic_info : basic_info

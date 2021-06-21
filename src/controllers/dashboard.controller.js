@@ -24,12 +24,13 @@ const templateController = catchAsync(async(req, res) => {
     const browser = await puppeteer.launch({
         executablePath: path
     })
+    console.log(req.query.product_id);
     // const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto('https://shrouded-crag-50550.herokuapp.com/pricing', {
+    await page.goto('http://localhost:3000/downloads/'+req.query.product_id, {
       waitUntil: 'networkidle2',
     });
-    let test =  await page.pdf({ path: 'hn.pdf', format: 'a4' });
+    let test =  await page.pdf({ path: 'hn.pdf', format: 'a4' , printBackground: true });
   
     await browser.close();
     res.send(test)

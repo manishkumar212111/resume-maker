@@ -4,8 +4,9 @@ const { password, objectId } = require('./custom.validation');
 const createProduct = {
   body: Joi.object().keys({
     contact_information : Joi.object(),
+    basic_info: Joi.string().custom(objectId),
     summary : Joi.string(),
-    employment_history : Joi.object(),
+    employment_history : Joi.array(),
     skills : Joi.object(),
     languages: Joi.array(),
     certifications : Joi.array(),
@@ -14,17 +15,19 @@ const createProduct = {
     conferences : Joi.array(),
     awards : Joi.array(),
     achievements: Joi.array(),
-    volunteers_works: Joi.array(),
+    volunteers: Joi.array(),
     patents : Joi.array(),
     references : Joi.array(),
     hobbies : Joi.array(),
-    custom_field: Joi.object(),
+    custom_field: Joi.array(),
     name: Joi.string(),
     template_id : Joi.string().required(),
     user:Joi.custom(objectId),
     status : Joi.number(),
     sample_map : Joi.object(),
-    style : Joi.object() 
+    style : Joi.object(),
+    extra : Joi.object(),
+    education : Joi.array()        
   }),
 };
 
@@ -55,27 +58,31 @@ const updateProduct = {
     .keys({
         contact_information : Joi.object(),
         summary : Joi.string(),
-        employment_history : Joi.object(),
+        basic_info: Joi.string().custom(objectId),
+        education : Joi.array(),        
+        employment_history : Joi.array(),
         skills : Joi.object(),
         languages: Joi.array(),
+        user:Joi.custom(objectId),
         certifications : Joi.array(),
         trainings : Joi.array(),
         publications : Joi.array(),
         conferences : Joi.array(),
         awards : Joi.array(),
         achievements: Joi.array(),
-        volunteers_works: Joi.array(),
+        volunteers: Joi.array(),
         patents : Joi.array(),
         references : Joi.array(),
         hobbies : Joi.array(),
-        custom_field: Joi.object(),
+        custom_field: Joi.array(),
         name: Joi.string(),
         template_id : Joi.string(),
         status : Joi.number(),
         sample_map : Joi.object(),
-        style : Joi.object()        
+        style : Joi.object(),
+        extra : Joi.object()        
     })
-    .min(1),
+    
 };
 
 const deleteProduct = {
