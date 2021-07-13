@@ -121,7 +121,12 @@ const productSchema = mongoose.Schema(
         type : Object,
         default : {
             softSkills : [],
-            skills : []
+            skills : [
+                // {
+                    // value : "",
+                    // score: 50
+                // }
+            ]
         }
     },
     languages : {
@@ -140,32 +145,38 @@ const productSchema = mongoose.Schema(
     },
     publications : {
         type : Object,
-        default : [{
-            title: "",
-            publisher : "",
-            date : "",
-            url : "",
-            description : ""
-        }]
+        default : [
+        //     {
+        //     title: "",
+        //     publisher : "",
+        //     date : "",
+        //     url : "",
+        //     description : ""
+        // }
+    ]
     },
     trainings : {
         type : Object,
-        default : [{
-            title: "",
-            provider : "",
-            date : "",
-            location : "",
-            description : ""
-        }]
+        default : [
+        //     {
+        //     title: "",
+        //     provider : "",
+        //     date : "",
+        //     location : "",
+        //     description : ""
+        // }
+        ]
     },
     conferences : {
         type : Object,
-        default : [{
-            title: "",
-            date : "",
-            location : "",
-            description : ""
-        }]
+        default : [
+        //     {
+        //     title: "",
+        //     date : "",
+        //     location : "",
+        //     description : ""
+        // }
+        ]
     },
     awards : {
         type : Array,
@@ -201,24 +212,28 @@ const productSchema = mongoose.Schema(
     },
     patents : {
         type : Object,
-        default : [{
-            tite: "",
-            PAN : "",
-            url:"",
-            description : "",
-            location:""
-        }]
+        default : [
+        //     {
+        //     tite: "",
+        //     PAN : "",
+        //     url:"",
+        //     description : "",
+        //     location:""
+        // }
+    ]
     },
     references : {
         type : Object,
-        default: [{
-            name: "",
-            company: "",
-            contact: ""   
-        }]
+        default: [
+        //     {
+        //     name: "",
+        //     company: "",
+        //     contact: ""   
+        // }
+    ]
     },
     hobbies: {
-        type: Object,
+        type: Array,
         default: []
     },
     custom_field : [{
