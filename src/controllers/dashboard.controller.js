@@ -28,7 +28,6 @@ const templateController = catchAsync(async(req, res) => {
         //     '--disable-setuid-sandbox'
         //   ]
     })
-    console.log(req.query.product_id);
     // const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto('http://localhost:3000/downloads/'+req.query.product_id, {
