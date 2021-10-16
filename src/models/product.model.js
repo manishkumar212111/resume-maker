@@ -26,6 +26,10 @@ const productSchema = mongoose.Schema(
         ref: 'User',
         required: true,  
     },
+    profileImage: {
+        type: String,
+        trim: true
+    },
     basic_info: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'basic_info',

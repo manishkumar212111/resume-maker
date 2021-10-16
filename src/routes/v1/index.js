@@ -8,7 +8,7 @@ const commonRoute = require('./common.route');
 const blogRoute = require('./blog.route');
 const E_template = require("./e.template.route")
 const Product = require("./product.route")
-
+const fileUpload = require("./fileupload");
 
 
 const router = express.Router();
@@ -18,6 +18,7 @@ router.use(['/user', '/users'], userRoute);
 router.use(['/plan', '/plans'], planRoute);
 router.use(['/common'], commonRoute);
 router.use(['/transaction'], transactionRoute);
+router.use(['/file'], fileUpload);
 
 router.use(['/enquiry'], enquiryRoute);
 router.use(['/blog'], blogRoute);

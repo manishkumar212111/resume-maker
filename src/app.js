@@ -53,6 +53,7 @@ passport.use('jwt', jwtStrategy);
 if (config.env === 'production') {
   app.use('/api/auth', authLimiter);
 }
+app.use('/uploads', express.static('uploads'));
 
 // v1 api routes
 app.use('/api', routes);
