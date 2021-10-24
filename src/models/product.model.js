@@ -16,6 +16,9 @@ const productSchema = mongoose.Schema(
         type: Boolean,
         default: false
     },
+    job_title:{
+      type: String
+    },
     template_id: {
         type: String,
         trim: true,

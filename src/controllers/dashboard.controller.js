@@ -33,7 +33,18 @@ const templateController = catchAsync(async(req, res) => {
     await page.goto('http://localhost:3000/downloads/'+req.query.product_id, {
       waitUntil: 'networkidle2',
     });
-    let test =  await page.pdf({ path: 'hn.pdf', format: 'A4' , printBackground: true });
+    let test =  await page.pdf({ 
+        format: 'A5',
+        printBackground: true,
+        // width:300,
+        margin: {
+            top: '0px',
+            right: '0px',
+            bottom: '0px',
+            left: '0px'
+        },
+        scale: 1
+    });
   
     await browser.close();
     res.send(test)

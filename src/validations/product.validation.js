@@ -27,7 +27,9 @@ const createProduct = {
     sample_map : Joi.object(),
     style : Joi.object(),
     extra : Joi.object(),
-    education : Joi.array()        
+    education : Joi.array(),
+    job_title : Joi.string()        
+
   }),
 };
 
@@ -62,6 +64,7 @@ const updateProduct = {
         education : Joi.array(),        
         employment_history : Joi.array(),
         skills : Joi.object(),
+        softSkills : Joi.object(),
         languages: Joi.array(),
         user:Joi.custom(objectId),
         certifications : Joi.array(),
@@ -80,7 +83,8 @@ const updateProduct = {
         status : Joi.number(),
         sample_map : Joi.object(),
         style : Joi.object(),
-        extra : Joi.object()        
+        extra : Joi.object(),
+        job_title : Joi.string()        
     })
     
 };
